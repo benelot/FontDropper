@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
@@ -26,6 +27,8 @@ public class FontDropper {
 	private int WINDOW_HEIGHT = 600;
 	private int FONT_SIZE = 40;
 	private int PRINT_DELAY_MILLIS = 100;
+	private String USE_LETTERS;
+//	private int i;
 
 	public FontDropper() {
 		getPropValues();
@@ -37,12 +40,17 @@ public class FontDropper {
 	private ActionListener timerAction = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent ae) {
-			int[] characterPositions = { 65, 66, 67, 68, 69, 70, 71, 72, 73,
-					74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
-					89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
-					108 };
-			char c = (char) (characterPositions[r
-					.nextInt(characterPositions.length)]);
+//			int[] characterPositions = { 65, 66, 67, 68, 69, 70, 71, 72, 73,
+//					74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
+//					89, 90, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107,
+//					108 };
+//			
+//			char c = (char) (characterPositions[r
+//					.nextInt(characterPositions.length)]);
+//			System.out.print((char) (characterPositions[i++]));
+			
+			char c = USE_LETTERS.charAt(r.nextInt(USE_LETTERS.length()));
+
 			msgArea.append(String.valueOf(c));
 		}
 	};
@@ -73,6 +81,9 @@ public class FontDropper {
 		WINDOW_HEIGHT = Integer.parseInt(prop.getProperty("windowheight"));
 		FONT_SIZE = Integer.parseInt(prop.getProperty("fontsize"));
 		PRINT_DELAY_MILLIS = Integer.parseInt(prop.getProperty("delay"));
+		USE_LETTERS = prop.getProperty("useLetters");
+		
+		
 	}
 
 	private void appendCharacter() {
